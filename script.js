@@ -31,6 +31,7 @@ function userClick(num){
             alert("winner. gagnant.");
             done++;
             restart.style.display = "block";
+            finish();
         }
     }
     console.log(userMoves);
@@ -38,6 +39,7 @@ function userClick(num){
         if(userMoves.length == 5){
             alert("Big 'Ol Tie");
             restart.style.display = "block";
+            finish();
         }
         setTimeout(function(){
             botClick();
@@ -63,6 +65,7 @@ function botClick(){
         if(containsAll(x,botMoves)){
             alert("loser. u stupid fack.");
             restart.style.display = "block";
+            finish();
         }
     }
     var value = remainingNumbers.indexOf(num);
@@ -75,4 +78,13 @@ function containsAll(needles, haystack){
      if($.inArray(needles[i], haystack) == -1) return false;
   }
   return true;
+}
+
+function finish(){
+    for(x of remainingNumbers){
+        var boxString = "box";
+        var boxNum = boxString.concat(x);
+        var box = document.getElementById(boxNum);
+        box.setAttribute("onclick","");
+    }
 }
