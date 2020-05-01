@@ -1,5 +1,5 @@
 .game{
-    width: 300px;
+    width: 45vw;
     border: 3px solid black;
     margin: auto;
 }
@@ -8,10 +8,10 @@
 }
 .box{
     border: 3px solid black;
-    width: 100px;
-    height: 100px; 
+    width: 15vw;
+    height: 15vw; 
     background-color: red;
-    font-size: 3rem;
+    font-size: 8rem;
     position: relative;
     text-align: center;
 }
