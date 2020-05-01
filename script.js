@@ -28,7 +28,7 @@ function userClick(num){
     box.setAttribute("onclick","");
     for(x of possibleWins){
         if(containsAll(x,userMoves)){
-            alert("winner. gagner.");
+            alert("winner. gagnant.");
             done++;
             restart.style.display = "block";
         }

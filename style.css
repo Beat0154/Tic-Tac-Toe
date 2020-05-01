@@ -36,3 +36,13 @@
     background-color: black;
     cursor: pointer;
 }
+@media only screen and (max-width:800px){
+    .game{
+        width: 75vw;
+    }
+    .box{
+        width: 25vw;
+        height: 25vw; 
+        font-size: 3rem;
+    }
+}
