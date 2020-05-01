@@ -1,5 +1,4 @@
-var numberArray = [0,1,2,3,4,5,6,7,8];
-var remainingNumbers = [0,1,2,3,4,5,6,7,8];
+var remainingNumbers = ["0","1","2","3","4","5","6","7","8"];
 var userMoves = [];
 var botMoves = [];
 var possibleWins = [
@@ -11,6 +10,9 @@ var possibleWins = [
     ["2","5","8"],
     ["0","4","8"],
     ["2","4","6"]];
+var done = 0;
+var counter = 0;
+var restart = document.getElementById("restart");
 function userClick(num){
     userMoves.push(num);
     var boxString = "box";
@@ -21,35 +23,51 @@ function userClick(num){
     var span = document.getElementById(spanNum);
     box.style.backgroundColor = "yellow";
     span.innerHTML = "X";
-    delete remainingNumbers[num];
-    var randomMove = remainingNumbers[~~(Math.random() * remainingNumbers.length)];
-    while(randomMove==undefined){
-        randomMove = remainingNumbers[~~(Math.random() * remainingNumbers.length)];
-    }
+    var value = remainingNumbers.indexOf(num);
+    remainingNumbers.splice(value,1);
     box.setAttribute("onclick","");
-    botClick(randomMove);
     for(x of possibleWins){
         if(containsAll(x,userMoves)){
             alert("winner. gagner.");
+            done++;
+            restart.style.display = "block";
         }
     }
-    console.log(botMoves);
+    console.log(userMoves);
+    if(done==0){
+        if(userMoves.length == 5){
+            alert("Big 'Ol Tie");
+            restart.style.display = "block";
+        }
+        setTimeout(function(){
+            botClick();
+      	},200);
+    }
 }
 
-function botClick(move){
-    botMoves.push(move);
+function botClick(){
+    var randomNumber = ~~(Math.random() * (remainingNumbers.length-1));
+    var randomMove = remainingNumbers[randomNumber];
+    var num = randomMove.toString();
+    botMoves.push(num);
+    var boxString = "box";
+    var boxNum = boxString.concat(num);
+    var box = document.getElementById(boxNum);
+    var spanString = "span";
+    var spanNum = spanString.concat(num);
+    var span = document.getElementById(spanNum);
+    box.style.backgroundColor = "orange";
+    span.innerHTML = "O";
+    box.setAttribute("onclick","");
     for(x of possibleWins){
         if(containsAll(x,botMoves)){
             alert("loser. u stupid fack.");
+            restart.style.display = "block";
         }
     }
-    var boxString = "box";
-    var boxNum = boxString.concat(move);
-    var box = document.getElementById(boxNum);
-    box.style.backgroundColor = "orange";
-    box.innerHTML = "O";
-    box.setAttribute("onclick","");
-    delete remainingNumbers[move];
+    var value = remainingNumbers.indexOf(num);
+    remainingNumbers.splice(value,1);
+    console.log(remainingNumbers);
 }
 
 function containsAll(needles, haystack){ 
